@@ -1,10 +1,19 @@
+<?php
+  if($this->session->userdata('MhsNim') != null) { // Ada Login Mahasiswa
+    redirect('mhs/dasbor');
+  } else if($this->session->userdata('UserLevelAktif') != null) { // belum login samsek
+    redirect('secure/dasbor/'.$this->session->userdata('UserLevelAktif'));
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <link rel="shorcut icon"  href="<?php echo base_url() ?>assets/img/umk/favicon-16x16.png">
-  <!-- <title><?php echo $title ?> &mdash; <?=$si ?></title> -->
+  <link rel="shorcut icon" href="<?php echo base_url() ?>assets/img/umk/favicon-16x16.png">
+  <!-- <title><?php echo $title ?> &mdash; <?= $si ?></title> -->
   <title>Login &mdash; Skripsi</title>
 
   <!-- General CSS Files -->
@@ -20,88 +29,90 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/components.css">
 </head>
 
-<body style="background:url(<?php echo base_url()?>assets/img/umk/auth-bg.jpg) no-repeat center center;">
+<body style="background:url(<?php echo base_url() ?>assets/img/umk/auth-bg.jpg) no-repeat center center;">
   <div id="app">
-    <section class="section" >
+    <section class="section">
       <div class="container mt-5">
-        <div class="row" >
-          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4" >
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <!-- <div class="login-brand">
               <img src="<?php echo base_url() ?>assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
             </div> -->
 
             <div class="card card-primary">
-              <div style="text-align: center;" class="card-header" ><h4 >Login</h4></div>
-<?php 
-// //notifikasi error
-// echo validation_errors('<div class="alert alert-warning">','</div>');
+              <div style="text-align: center;" class="card-header">
+                <h4>Login</h4>
+              </div>
+              <?php
+              // //notifikasi error
+              // echo validation_errors('<div class="alert alert-warning">','</div>');
 
-//notifikasi gagal login
-if($this->session->flashdata('salah')) {
-  echo '<div class="alert alert-warning">';
-  echo $this->session->flashdata('salah');
-  echo '</div>';
-}
+              //notifikasi gagal login
+              if ($this->session->flashdata('salah')) {
+                echo '<div class="alert alert-warning">';
+                echo $this->session->flashdata('salah');
+                echo '</div>';
+              }
 
-//notifikasi relog
-if($this->session->flashdata('relog')) {
-  echo '<div class="alert alert-danger">';
-  echo $this->session->flashdata('relog');
-  echo '</div>';
-}
+              //notifikasi relog
+              if ($this->session->flashdata('relog')) {
+                echo '<div class="alert alert-danger">';
+                echo $this->session->flashdata('relog');
+                echo '</div>';
+              }
 
-//notifikasi logout
-// if($this->session->flashdata('logout')) {
-//   echo '<div class="alert alert-info">';
-//   echo $this->session->flashdata('logout');
-//   echo '</div>';
-// }
- 
-?>
+              //notifikasi logout
+              // if($this->session->flashdata('logout')) {
+              //   echo '<div class="alert alert-info">';
+              //   echo $this->session->flashdata('logout');
+              //   echo '</div>';
+              // }
 
-<?php 
-if($this->session->flashdata('logout')) { ?>
-                    <div class="alert alert-info alert-dismissible show fade">
-                      <div class="alert-body">
-                        <button class="close" data-dismiss="alert">
-                          <span>&times;</span>
-                        </button>
-                      <?php 
-                         echo $this->session->flashdata('logout');
-                      ?>
-                      </div>
-                    </div>
-<?php
-}
-?> 
+              ?>
+
+              <?php
+              if ($this->session->flashdata('logout')) { ?>
+                <div class="alert alert-info alert-dismissible show fade">
+                  <div class="alert-body">
+                    <button class="close" data-dismiss="alert">
+                      <span>&times;</span>
+                    </button>
+                    <?php
+                    echo $this->session->flashdata('logout');
+                    ?>
+                  </div>
+                </div>
+              <?php
+              }
+              ?>
 
               <div class="card-body">
-                <form name="s_login" action="<?= base_url('home/secure'); ?>" onsubmit="return login_s()"  method="POST">
+                <form name="s_login" action="<?= base_url('home/secure'); ?>" onsubmit="return login_s()" method="POST">
                   <div class="form-group">
-                      <label for="username">Username</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <i class="fas fa-id-card"></i>
-                          </div>
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="fas fa-id-card"></i>
                         </div>
-                        <input type="text" class="form-control phone-number " name="username" >
-                      
                       </div>
-                    </div>
+                      <input type="text" class="form-control phone-number " name="username">
 
-                    <div class="form-group">
-                      <label for="password2" class="d-block">Password</label>
-                      <div class="input-group">
-                      <input id="password2" type="password" class="form-control" name="password">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">
-                            <div class="btn btn-sm" onclick="showPassword2()"><i id="icon2" class="fa fa-eye-slash"></i></div>
-                          </div>
-                        </div>
-                       
-                      </div>
                     </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password2" class="d-block">Password</label>
+                    <div class="input-group">
+                      <input id="password2" type="password" class="form-control" name="password">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <div class="btn btn-sm" onclick="showPassword2()"><i id="icon2" class="fa fa-eye-slash"></i></div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
 
                   <!-- <div class="form-group">
                     <div class="custom-control custom-checkbox">
@@ -116,7 +127,7 @@ if($this->session->flashdata('logout')) { ?>
                     </button>
                   </div>
                 </form>
-              <!--   <div class="text-center mt-4 mb-3">
+                <!--   <div class="text-center mt-4 mb-3">
                   <div class="text-job text-muted">Login With Social</div>
                 </div>
                 <div class="row sm-gutters">
@@ -155,13 +166,14 @@ if($this->session->flashdata('logout')) { ?>
   <script src="<?php echo base_url() ?>assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
- 
+
 
   <!-- Template JS File -->
   <script src="<?php echo base_url() ?>assets/js/scripts.js"></script>
-  <script src="<?php echo base_url() ?>assets/js/custom.js"></script> 
+  <script src="<?php echo base_url() ?>assets/js/custom.js"></script>
   <script src="<?php echo base_url() ?>assets/dist/sweetalert2.all.min.js"></script>
 
   <!-- Page Specific JS File -->
 </body>
+
 </html>

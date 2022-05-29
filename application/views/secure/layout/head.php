@@ -1,3 +1,11 @@
+<?php
+  if($this->session->userdata('UserLevelAktif') == null && $this->session->userdata('MhsNim') != null) { // Ada Login Mahasiswa
+    redirect('mhs/dasbor');
+  } else if($this->session->userdata('UserLevelAktif') == null) { // belum login samsek
+    redirect('home/secure');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +34,6 @@
   <link rel="stylesheet" href="<?php echo base_url() ?>vendor/stisla/node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
   <link rel="stylesheet" href="<?php echo base_url() ?>vendor/stisla/node_modules/bootstrap-daterangepicker/daterangepicker.css">
 
-  
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="<?php echo base_url() ?>assets/dist/iziToast.min.js"></script>
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/dist/iziToast.min.css">

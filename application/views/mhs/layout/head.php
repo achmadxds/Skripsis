@@ -1,3 +1,11 @@
+<?php
+  if($this->session->userdata('UserLevelAktif') != null && $this->session->userdata('MhsNim') == null) { // Ada Login Mahasiswa
+    redirect('secure/dasbor');
+  } else if($this->session->userdata('MhsNim') == null) { // belum login samsek
+    redirect('home/login');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
