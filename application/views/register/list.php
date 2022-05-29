@@ -1,17 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <link rel="shorcut icon"  href="<?php echo base_url() ?>assets/img/umk/favicon-16x16.png">
-  <title><?=$title  ?> &mdash; <?=$si ?></title>
+  <link rel="shorcut icon" href="<?php echo base_url() ?>assets/img/umk/favicon-16x16.png">
+  <title><?= $title  ?> &mdash; <?= $si ?></title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="<?php echo base_url() ?>vendor/stisla/node_modules/selectric/public/selectric.css">
@@ -27,28 +27,35 @@
 
 
 </head>
-<body style="background:url(<?php echo base_url()?>assets/img/umk/register.png) no-repeat center center;">
-  <?php if ($this->session->flashdata('simpan')) 
-{ echo $this->session->flashdata('simpan'); }?>
 
-<?php if ($this->session->flashdata('edit')) 
-{ echo $this->session->flashdata('edit'); }?>
+<body style="background:url(<?php echo base_url() ?>assets/img/umk/register.png) no-repeat center center;">
+  <?php if ($this->session->flashdata('simpan')) {
+    echo $this->session->flashdata('simpan');
+  } ?>
 
-<?php if ($this->session->flashdata('hapus')) 
-{ echo $this->session->flashdata('hapus'); }?>
+  <?php if ($this->session->flashdata('edit')) {
+    echo $this->session->flashdata('edit');
+  } ?>
 
-<?php if (validation_errors()) 
-{ echo validation_errors(); }?>
+  <?php if ($this->session->flashdata('hapus')) {
+    echo $this->session->flashdata('hapus');
+  } ?>
+
+  <?php if (validation_errors()) {
+    echo validation_errors();
+  } ?>
   <div id="app">
     <section class="section">
       <div class="container mt-5">
         <div class="row">
           <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
             <div class="card card-primary">
-              <div class="card-header"><h4>Pendaftaran</h4></div>
+              <div class="card-header">
+                <h4>Pendaftaran</h4>
+              </div>
 
               <div class="card-body">
-                <form  name="fdaftar" action="<?= base_url('home/register'); ?>" onsubmit="return daftar_form()"   method="POST">
+                <form name="fdaftar" action="<?= base_url('home/register'); ?>" onsubmit="return daftar_form()" method="POST">
 
                   <div class="row">
                     <div class="form-group col-6">
@@ -59,8 +66,8 @@
                             <i class="fas fa-id-card"></i>
                           </div>
                         </div>
-                        <input type="text" class="form-control number" name="nim" >
-                       
+                        <input type="text" class="form-control number" name="nim">
+
                       </div>
                     </div>
                     <div class="form-group col-6">
@@ -72,72 +79,72 @@
                           </div>
                         </div>
                         <input type="text" class="form-control phone-number" name="nama">
-                        
+
                       </div>
                     </div>
                   </div>
 
                   <div class="row">
 
-                       <div class="form-group col-6">
-                    <label for="nohp">No Hanphone</label>
-                    <div class="input-group">
+                    <div class="form-group col-6">
+                      <label for="nohp">No Hanphone</label>
+                      <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
                             <i class="fas fa-mobile-alt"></i>
                           </div>
                         </div>
-                        <input  min="12" class="form-control" name="nohp" onkeypress="return event.charCode >=48 && event.charCode <=57" maxlength="13">
-                   </div>
-                  </div>
+                        <input min="12" class="form-control" name="nohp" onchange="changeNumber(this)" onkeypress="return event.charCode >=48 && event.charCode <=57" maxlength="13">
+                      </div>
+                    </div>
 
-                  <div class="form-group col-6">
-                    <label for="alamat">Alamat</label>
-                    <div class="input-group">
+                    <div class="form-group col-6">
+                      <label for="alamat">Alamat</label>
+                      <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
                             <i class="fas fa-map-marker-alt"></i>
                           </div>
                         </div>
-                        <input type="text" class="form-control" name="alamat" >
-                        
-                   </div>
+                        <input type="text" class="form-control" name="alamat">
+
+                      </div>
+                    </div>
                   </div>
-                 </div>
 
                   <div class="row">
 
-                      <div class="form-group col-6">
-                    <label for="email">Email</label>
-                    <div class="input-group">
+                    <div class="form-group col-6">
+                      <label for="email">Email</label>
+                      <div class="input-group">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
                             <i class="fas fa-at"></i>
                           </div>
                         </div>
                         <input type="email" class="form-control" name="email">
-                        
-                   </div>
-                  </div>
+
+                      </div>
+                    </div>
 
                     <div class="form-group col-6">
                       <label for="password">Password</label>
-                        <div class="input-group ">
-                       <input id="password1" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password">
+                      <div class="input-group ">
+                        <input id="password1" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password">
                         <div class="input-group-prepend">
                           <div class="input-group-text">
                             <i onclick="showPassword1()" id="icon1" class="btn btn-sm fa fa-eye-slash"></i>
                           </div>
                         </div>
-                        
+
                       </div>
-                       <div id="pwindicator" class="pwindicator">
+                      <div id="pwindicator" class="pwindicator">
                         <div class="bar"></div>
                         <div class="label"></div>
                       </div>
-                      </div>
+                    </div>
 
-                   <!--  <div class="form-group col-6">
+                    <!--  <div class="form-group col-6">
                       <label for="password2" >Konfirmasi Password</label>
                       <div class="input-group ">
                         <input id="password2" type="password" class="form-control" name="password-confirm" required>
@@ -151,31 +158,40 @@
                       </div>
                       </div>
                     </div>-->
-                  </div> 
+                  </div>
 
                   <div class="form-group">
-                    <button type="submit"   class="btn btn-primary btn-lg btn-block">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">
                       Daftar
                     </button>
                     <div align="center">
                       <br>
                       <label>Sudah Punya akun ? <a href="login">Ayo Login !</a></label>
                     </div>
-                    
+
                   </div>
                 </form>
               </div>
             </div>
-           
+
             <div class="simple-footer">
               Copyright &copy; 2021 <div class="bullet"></div> Design By <a style="color: #1aa9f0;">CELTIC</a>
             </div>
           </div>
         </div>
       </div>
-       </section>
+    </section>
   </div>
 
+  <script>
+    function changeNumber(param) {
+      let val = param.value;
+      let explode = val.split('');
+      explode[0] = '62';
+      let imp = explode.join('');
+      param.value = imp;
+    }
+  </script>
 
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -198,4 +214,5 @@
   <script src="<?php echo base_url() ?>assets/js/page/auth-register.js"></script>
 
 </body>
+
 </html>
